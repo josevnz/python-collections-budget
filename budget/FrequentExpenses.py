@@ -7,12 +7,12 @@ import matplotlib.pyplot as plt
 PARENT_DIR = Path(__file__).parent.parent
 SPENDING_DATA = path.join(PARENT_DIR, 'data', 'spending_data.csv')
 
-expense = Expense.Expenses()
-expense.read_expenses(SPENDING_DATA)
+expenses = Expense.Expenses()
+expenses.read_expenses(SPENDING_DATA)
 
 spending_categories = []
-for expense in expense.list:
-    spending_categories.append(expense.category)
+for expenses in expenses.list:
+    spending_categories.append(expenses.category)
 spending_counter = collections.Counter(spending_categories)
 print(spending_counter)
 top5 = spending_counter.most_common(5)
