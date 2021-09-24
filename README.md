@@ -1,3 +1,7 @@
+# NOTE
+
+This is my own version of the PluralSight course answers. It includes changes to make it work with Pycharm.
+
 # Setup
 1. ### Install python
     Install python3 per your OS instructions.
