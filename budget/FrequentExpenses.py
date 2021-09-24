@@ -1,7 +1,7 @@
 import collections
 from pathlib import Path
 from os import path
-import Expense
+from budget import Expense
 import matplotlib.pyplot as plt
 
 PARENT_DIR = Path(__file__).parent.parent
