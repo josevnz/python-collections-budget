@@ -2,23 +2,9 @@ from pathlib import Path
 
 import pytest
 import ast
-from tests import utils
+from tests import utils, get_real_path, load_ast_tree
 from budget import BudgetList
 from os import path
-
-
-def __get_real_path(filename):
-    parent_dir = Path(__file__).parent.parent
-    return path.join(parent_dir, filename)
-
-
-def load_ast_tree(filename):
-    try:
-        with open(__get_real_path(filename)) as f:
-            fstr = f.read()
-            return ast.parse(fstr, filename=filename)
-    except IOError:
-        return ast.parse("()")
 
 
 # Create class BudgetList
@@ -34,8 +20,8 @@ def test_task1_module2():
     except Exception as e:
         pass
 
-    assert path.exists(__get_real_path('budget/BudgetList.py')), 'Did you create a file named `BudgetList.py` in the ' \
-                                                                 '`budget/` folder? '
+    assert path.exists(get_real_path('budget/BudgetList.py')), 'Did you create a file named `BudgetList.py` in the ' \
+                                                               '`budget/` folder? '
     assert class_found, 'Did you create a `class BudgetList` in `BudgetList.py`?'
 
 
@@ -75,7 +61,7 @@ def test_task2_module2():
     assert init_found, 'Did you create the `__init__` method in the `BudgetList` class?'
     assert args_found, 'The `__init__` method should take `self` and `budget` as parameters.'
     assert self_budget_assign_found, 'Did you initialize `self.budget` to `budget` in `__init__`()?'
-    expenses_assign_found = True # Test code utils.get_assignments is broken
+    expenses_assign_found = True  # Test code utils.get_assignments is broken
     assert expenses_assign_found, 'Did you initialize `sum_expenses` to 0 and `expenses` to an empty list in ' \
                                   '`__init__`()? '
     overages_assign_found = True  # Test code utils.get_assignments is broken
