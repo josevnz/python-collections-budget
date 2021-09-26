@@ -28,7 +28,7 @@ def main():
     assert divided_for_loop[2] == divided_set_comp[2]
     """
     for a, b in zip(divided_for_loop, divided_set_comp):
-        if not (a.issubset(b) or b.issubset(b)):
+        if not (a.issubset(b) and b.issubset(a)):
             print("Sets are NOT equal by subset test")
 
 
