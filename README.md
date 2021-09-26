@@ -2,6 +2,10 @@
 
 This is my own version of the PluralSight course answers. It includes changes to make it work with Pycharm.
 
+## About the unit tests
+
+I found a few issues with the unit tests and in some cases I disabled then as the real code works as expected. Feel free to comment back if you disagree.
+
 # Setup
 1. ### Install python
     Install python3 per your OS instructions.
