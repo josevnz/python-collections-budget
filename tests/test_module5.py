@@ -1,15 +1,8 @@
 import pytest
 import ast
-from tests import utils
+from tests import utils, load_ast_tree
 from budget import ExpenseCategories
 
-def load_ast_tree(filename):
-        try:
-            with open(filename) as f:
-                fstr = f.read()
-                return ast.parse(fstr, filename=filename)
-        except:
-            return ast.parse("()")
 
 # import timeit
 @pytest.mark.test_task1_module5
@@ -23,7 +16,9 @@ def test_task2_module5():
     calls = utils.get_calls(ExpenseCategories)
 
     expected_timeit_str = 'timeit:timeit:stmt:pass:setup:\n:number:100000:globals:globals'
-    expected_timeit_str_2 = 'timeit:timeit:stmt:expenses.categorize_for_loop():setup:\n from . import Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(\'data/spending_data.csv\')\n:number:100000:globals:globals'
+    expected_timeit_str_2 = 'timeit:timeit:stmt:expenses.categorize_for_loop():setup:\n from . import ' \
+                            'Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(' \
+                            '\'data/spending_data.csv\')\n:number:100000:globals:globals '
 
     for x in calls:
         if (expected_timeit_str in x.replace(" ", "") or 
@@ -54,7 +49,9 @@ def test_task4_module5():
     found_timeit_call = False
     calls = utils.get_calls(ExpenseCategories)
 
-    expected_timeit_str = 'print:timeit:timeit:stmt:expenses.categorize_for_loop():setup:\n from . import Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(\'data/spending_data.csv\')\n:number:100000:globals:globals'
+    expected_timeit_str = 'print:timeit:timeit:stmt:expenses.categorize_for_loop():setup:\n from . import ' \
+                          'Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(' \
+                          '\'data/spending_data.csv\')\n:number:100000:globals:globals '
 
     for x in calls:
         if expected_timeit_str.replace(" ", "") in x.replace(" ", ""):
@@ -69,13 +66,16 @@ def test_task5_module5():
     found_timeit_call = False
     calls = utils.get_calls(ExpenseCategories)
 
-    expected_timeit_str = 'print:timeit:timeit:stmt:expenses.categorize_set_comprehension():setup:\n from . import Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(\'data/spending_data.csv\')\n:number:100000:globals:globals'
+    expected_timeit_str = 'print:timeit:timeit:stmt:expenses.categorize_set_comprehension():setup:\n from . import ' \
+                          'Expense\nexpenses = Expense.Expenses()\nexpenses.read_expenses(' \
+                          '\'data/spending_data.csv\')\n:number:100000:globals:globals '
 
     for x in calls:
         if expected_timeit_str.replace(" ", "") in x.replace(" ", ""):
             found_timeit_call = True
 
-    message = 'Did you copy and paste the entire `print(timeit.timeit(...))` from the previous task and replace the `stmt` with `expenses.categorize_set_comprehension()`?'
+    message = 'Did you copy and paste the entire `print(timeit.timeit(...))` from the previous task and replace the ' \
+              '`stmt` with `expenses.categorize_set_comprehension()`? '
     assert found_timeit_call, message
 
   # Call plt.subplots() object
@@ -104,7 +104,8 @@ def test_task6_module5():
             # print('for print e = ' + str(e))
             pass
     
-    assert fig_ax_tuple_found and plt_subplots_call_found, 'Did you assign a Tuple `fig,ax` to a call to `plt.subplots()`?'
+    assert fig_ax_tuple_found and plt_subplots_call_found, 'Did you assign a Tuple `fig,ax` to a call to ' \
+                                                           '`plt.subplots()`? '
 
 
 # Assign labels []
@@ -132,14 +133,16 @@ def test_task7_module5():
             # print('labels e = ' + str(e))
             pass
 
-    assert assign_labels_found and correct_labels, 'Did you assign a variable named `labels` to `[\'Necessary\', \'Food\', \'Unnecessary\']`?'
+    assert assign_labels_found and correct_labels, 'Did you assign a variable named `labels` to `[\'Necessary\', ' \
+                                                   '\'Food\', \'Unnecessary\']`? '
 
 # Assign divided_expenses_sum
 @pytest.mark.test_task8_module5
 def test_task8_module5():
     assigns = utils.get_assignments(ExpenseCategories)
 
-    assert 'divided_expenses_sum' in assigns, 'Did you create a variable `divided_expenses_sum` assigned to an empty list?'
+    assert 'divided_expenses_sum' in assigns, 'Did you create a variable `divided_expenses_sum` assigned to an empty ' \
+                                              'list? '
 
 # Sum each set's expenses
 @pytest.mark.test_task9_module5
@@ -175,7 +178,7 @@ def test_task10_module5():
                             y.value.func.attr == 'pie'):
                             ax_pie_found = True
                             call = utils.get_calls_from_child(y)
-                            if ('ax:pie:divided_expenses_sum:labels:labels:autopct:%1.1f%%' in call):
+                            if 'ax:pie:divided_expenses_sum:labels:labels:autopct:%1.1f%%' in call:
                                 correct_values = True
 
 
@@ -183,7 +186,8 @@ def test_task10_module5():
             pass
 
     assert ax_pie_found, 'Did you call `ax.pie()`?'
-    assert correct_values, 'Did you call `ax.pie()` with the following parameters: `divided_expenses_sum, labels=labels, autopct=\'%1.1f%%\'`?'
+    assert correct_values, 'Did you call `ax.pie()` with the following parameters: `divided_expenses_sum, ' \
+                           'labels=labels, autopct=\'%1.1f%%\'`? '
 
 
 # Call plt.show()

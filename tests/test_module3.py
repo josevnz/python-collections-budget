@@ -1,6 +1,6 @@
 import pytest
 import ast
-from tests import utils, get_real_path, load_ast_tree
+from tests import utils, load_ast_tree
 from budget import BudgetList
 from os import path
 
